@@ -16,6 +16,10 @@ library(vtable)
 install.packages("plm")
 Yes
 library(plm)
+install.packages("dplyr")
+library(dplyr)
+install.packages("magrittr")
+library(magrittr)
 
 # Set directory
 setwd("/Users/yangshuya/Desktop/Jasmine Yang/PhD/Econometrics 2/Replication/Replication/data")
@@ -56,5 +60,14 @@ st(sumdata, add.median=TRUE, labels=labs,
 # Checking if counties with/without mass shootings and counties with
 # successful vs. failed mass shootings are different in observable
 # characteristics
+
+# Run regression with cluster-robust standard errors
+# Generate lag 1 republican share variable
+
+DF <- DF %>% mutate(lag1_repshare = lag(repshare))
+
+reg <- plm(lag1_repshare ~ ms + popsd, data = DF, 
+           subset = mse == 0 | ms == 1, index = "fips", model = "random", 
+           effect = "twoways", cluster = "group")
 
 
