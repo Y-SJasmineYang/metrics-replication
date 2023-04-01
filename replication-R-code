@@ -25,7 +25,7 @@ head(DF)
 summary(DF$repsharey)
 summary(DF)
 
-# Creating summary statistics table
+# Creating summary statistics table (table 1)
 
 DF_sum <- c("repshare", "turnout", "popsd", "capital_state", "airport", 
             "lnincome", "poverty", "gini", "racialhhi", "mentalhealth", 
