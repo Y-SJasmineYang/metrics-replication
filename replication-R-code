@@ -1,1 +1,51 @@
 
+# Replication bit
+
+# Load packages
+library(foreign)
+library(stargazer)
+library(tidyverse)
+library(Hmisc)
+library(readstata13)
+library(haven)
+library(texreg)
+library(xtable)
+library(knitr)
+install.packages("vtable")
+library(vtable)
+
+# Set directory
+setwd("/Users/yangshuya/Desktop/Jasmine Yang/PhD/Econometrics 2/Replication/Replication/data")
+DF <- read.dta13("yearly-obs.dta")
+
+order(DF$fips, DF$year)
+
+# First look at data
+head(DF)
+summary(DF$repsharey)
+summary(DF)
+
+# Creating summary statistics table
+
+DF_sum <- c("repshare", "turnout", "popsd", "capital_state", "airport", 
+            "lnincome", "poverty", "gini", "racialhhi", "mentalhealth", 
+            "pop15t39", "nevermarried", "sc", "lnhom_gun", "lnsui_gun", 
+            "lncrime_violent", "lncrime_proprty")
+            
+sumdata <- DF[DF_sum]
+
+labs <- c("Republican share", "Turnout", 
+          "Population (standardized)", "State capitol",
+          "Major city", "Log (median HH income)", 
+          "Poverty rate","Inequality (Gini Index)", 
+          "Racial diversity HHI", 
+          "Proportion with mental issues", 
+          "Population 15 to 39 years", "Single",
+          "College dropouts", "Log (homicides by gun)", 
+          "Log (suicides by Gun)","Log (violent crime)",
+          "Log (property crime)")
+
+st(sumdata, add.median=TRUE, labels=labs, 
+   digits = 2, fixed.digits = FALSE, numformat = NA, out="latex", 
+   title='Summary Statistics')
+
