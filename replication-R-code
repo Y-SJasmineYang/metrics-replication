@@ -56,13 +56,39 @@ st(sumdata, add.median=TRUE, labels=labs,
 # successful vs. failed mass shootings are different in observable
 # characteristics
 
-# Run regression with cluster-robust standard errors
-# Generate lag 1 republican share variable
+# Starting all over again to generate table 2
 
-DF <- DF %>% mutate(lag1_repshare = lag(repshare))
+# Creating vector of variable names to create lags for
+var_names <- c("repshare", "turnout", "capital_state", "lnincome", "poverty", 
+               "gini", "racialhhi", "mentalhealth", "pop15t39", "nevermarried", "sc", 
+               "lnhom_gun", "lnsui_gun", "lncrime_violent", "lncrime_proprty")
 
-reg <- plm(lag1_repshare ~ ms + popsd, data = DF, 
-           subset = mse == 0 | ms == 1, index = "fips", model = "random", 
-           effect = "twoways", cluster = "group")
+# Generate lagged variables for each variable in var_names
+for (var_name in var_names) {
+  DF[[paste0(var_name, "_lag1")]] <- c(NA, DF[[var_name]][-nrow(DF)])
+}
+
+# Regress the lagged variables on ms and popsd
+# define variables to lag and regress
+vars_to_lag <- c("repshare_lag1", "turnout_lag1", "capital_state_lag1", "lnincome_lag1", "poverty_lag1", 
+                 "gini_lag1", "racialhhi_lag1", "mentalhealth_lag1", "pop15t39_lag1", "nevermarried_lag1", "sc_lag1", 
+                 "lnhom_gun_lag1", "lnsui_gun_lag1", "lncrime_violent_lag1", "lncrime_proprty_lag1")
+
+indep_vars <- c("ms", "popsd")
+
+# create empty list to store regression results
+reg_results <- list()
+
+for (var_name in vars_to_lag) {
+  
+ reg <- plm(as.formula(paste0(var_name, " ~ ", paste(indep_vars, collapse="+"))), 
+             data = DF, subset = mse == 0 | ms == 1, index = "fips", 
+             model = "random", effect = "twoways", cluster = "group")
+  
+  reg_results[[var_name]] <- reg
+  
+}
+
+print(reg_results)
 
 
