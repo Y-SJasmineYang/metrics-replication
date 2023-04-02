@@ -11,14 +11,9 @@ library(haven)
 library(texreg)
 library(xtable)
 library(knitr)
-install.packages("vtable")
 library(vtable)
-install.packages("plm")
-Yes
 library(plm)
-install.packages("dplyr")
 library(dplyr)
-install.packages("magrittr")
 library(magrittr)
 
 # Set directory
