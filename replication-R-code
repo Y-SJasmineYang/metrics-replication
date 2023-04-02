@@ -77,6 +77,8 @@ indep_vars <- c("ms", "popsd")
 # create empty list to store regression results
 reg_results <- list()
 
+# Strategy 1 regression
+
 for (var_name in vars_to_lag) {
   
  reg <- plm(as.formula(paste0(var_name, " ~ ", paste(indep_vars, collapse="+"))), 
@@ -105,3 +107,6 @@ stargazer(reg_results, type = "latex", header = FALSE, title = "County Character
                             "Log (property crime)"), 
           row.labels = c("Constant", "MS", "Population"),
           flip = TRUE)
+
+# Strategy 2 regression
+
