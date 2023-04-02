@@ -112,3 +112,28 @@ stargazer(reg_results, type = "latex", header = FALSE, title = "County Character
 
 # Strategy 2 regression
 
+# Table 4
+# Strategy 1
+# Load data into dataframe 'DF2'
+
+DF2 <- read.dta13("pres-elec.dta")
+
+# Convert 'county' and 'year' variables to factor
+DF2$county <- as.factor(DF2$county)
+DF2$year <- as.factor(DF2$year)
+
+# Define formula for regression
+formula <- repshare ~ mspost
+
+# Create plm model with fixed effects for 'county' and 'year' and clustered standard errors by 'state'
+model <- plm(formula, data = DF2, index = c("county", "year"), model = "within", 
+             effect = "twoways", cluster = "state")
+
+# Generate table using stargazer package and export to LaTeX
+stargazer(model, type = "latex", title = "Regression Results", 
+          dep.var.labels.include = FALSE, 
+          column.labels = c("mspost"), 
+          row.labels = c("repshare"), 
+          out = "$tables/table4.tex")
+
+
