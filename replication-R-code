@@ -20,7 +20,6 @@ library(magrittr)
 setwd("/Users/yangshuya/Desktop/Jasmine Yang/PhD/Econometrics 2/Replication/Replication/data")
 
 # Starting by looking at the yearly-obs data for summary characteristics
-
 DF <- read.dta13("yearly-obs.dta")
 
 order(DF$fips, DF$year)
