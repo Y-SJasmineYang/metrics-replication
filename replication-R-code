@@ -52,11 +52,9 @@ st(sumdata, add.median=TRUE, labels=labs,
    title='Summary Statistics')
 
 # Table 2
-# Checking if counties with/without mass shootings and counties with
+# Strategy 1: Checking if counties with/without mass shootings and counties with
 # successful vs. failed mass shootings are different in observable
 # characteristics
-
-# Starting all over again to generate table 2
 
 # Creating vector of variable names to create lags for
 var_names <- c("repshare", "turnout", "capital_state", "lnincome", "poverty", 
