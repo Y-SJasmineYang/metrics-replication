@@ -129,6 +129,13 @@ formula <- repshare ~ mspost
 # Create plm model with fixed effects for 'county' and 'year' and clustered standard errors by 'state'
 model <- plm(formula, data = DF2, index = c("county", "year"), model = "within", 
              effect = "twoways", cluster = "state")
+             
+print(model)
+
+# Coefficients:
+#  mspost 
+#-0.06167 
+# Consistent with author result
 
 
 
