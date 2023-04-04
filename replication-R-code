@@ -114,6 +114,7 @@ stargazer(reg_results, type = "latex", header = FALSE, title = "County Character
 
 # Table 4
 # Strategy 1
+# Sample: all county-year observations (15,570)
 # Load data into dataframe 'DF2'
 
 DF2 <- read.dta13("pres-elec.dta")
@@ -209,6 +210,7 @@ print(model)
 
 # Coefficient sizes slightly different from author results in columns 4 and 5
 
-
+# Strategy 2
+# Sample: successful and failed mass shootings
 
 
