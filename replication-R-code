@@ -137,5 +137,23 @@ print(model)
 #-0.06167 
 # Consistent with author result
 
+# Column 2
+# Create fixed effect regression model that controls for population and flexible population trends
 
+# Create the interaction term
 
+DF2$c.popsd.year <- DF2$popsd * DF2$year
+
+# Estimate the fixed effects model with c.popsd.year as an additional control
+
+formula <- repshare ~ mspost + c.popsd.year
+
+model <- plm(formula, data = DF2, index = c("county", "year"), model = "within", 
+             effect = "twoways", cluster = "state")
+
+print(model)
+
+#Coefficients:
+#      mspost c.popsd.year 
+#  -0.0362091   -0.0066583 
+# Consistent with author result
