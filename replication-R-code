@@ -157,3 +157,58 @@ print(model)
 #      mspost c.popsd.year 
 #  -0.0362091   -0.0066583 
 # Consistent with author result
+
+# Column 3
+# Include state-year fixed effects
+
+formula <- repshare ~ mspost + c.popsd.year
+
+model <- plm(formula, data = DF2, index = c("county", "stateyear"), model = "within", 
+             effect = "twoways", cluster = "state")
+             
+print(model)
+
+#Coefficients:
+#      mspost c.popsd.year 
+#  -0.0271556   -0.0053293 
+# Consistent with author result
+
+# Column 4
+# equation (2) and weight observations by county population
+
+formula <- repshare ~ mspost + c.popsd.year
+
+weights <- DF2$pop
+
+model <- plm(formula, data = DF2, index = c("county", "year"), model = "within", 
+             effect = "twoways", cluster = "state",
+             weights = weights)
+
+print(model)
+
+#Coefficients:
+#      mspost c.popsd.year 
+#  -0.0315359   -0.0074837 
+
+# Column 5
+# equation (3) and weight observations by county population
+
+formula <- repshare ~ mspost + c.popsd.year
+
+weights <- DF2$pop
+
+model <- plm(formula, data = DF2, index = c("county", "stateyear"), model = "within", 
+             effect = "twoways", cluster = "state",
+             weights = weights)
+
+print(model)
+
+#Coefficients:
+#      mspost c.popsd.year 
+#   -0.026269    -0.006539 
+
+# Coefficient sizes slightly different from author results in columns 4 and 5
+
+
+
+
