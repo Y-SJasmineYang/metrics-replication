@@ -212,5 +212,29 @@ print(model)
 
 # Strategy 2
 # Sample: successful and failed mass shootings
+# Load data into dataframe 'DF3'
+
+DF3 <- read.dta13("pres-elec-succfail.dta")
+
+# Check for missing values
+sum(is.na(DF3$popsd))  # Check for missing values in popsd
+sum(is.na(DF3$year))   # Check for missing values in year
+# No missing value found
+
+# Column 1
+
+formula <- repshare ~ successful + postattack
+
+model <- plm(repshare ~ successful + postattack, 
+             data = subset(DF3, mse == 1 | failmse == 1),
+             index = c("county", "year"), model = "within", 
+             effect = "twoways", cluster = "state")
+
+print(model)
+
+#Coefficients:
+#successful postattack 
+#-0.0345958  0.0091828 
+# Consistent with author result
 
 
