@@ -287,5 +287,21 @@ print(model)
 # -2.3299e-02  -5.8868e-03  -4.4138e-05 
 
 # Column 5
+# equation 3 weighted by county population
+# again, why didn't he use the subset here?
+
+formula <- repshare ~ successful + postattack + c.popsd.year
+
+weights <- DF3$pop
+
+model <- plm(formula, data = DF3, index = c("county", "stateyear"), 
+             model = "within", effect = "twoways", cluster = "state",
+             weights = weights)
+
+print(model)
+
+#Coefficients:
+#  successful   postattack c.popsd.year 
+# -1.4953e-02  -4.1177e-03  -3.9094e-05 
 
 
