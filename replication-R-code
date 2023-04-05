@@ -270,4 +270,22 @@ print(model)
 # -1.9373e-02  -7.0745e-04  -3.4467e-05 
 
 # Column 4
+# equation 2 weighted by county population
+
+formula <- repshare ~ successful + postattack + c.popsd.year
+
+weights <- DF3$pop
+
+model <- plm(formula, data = DF3, index = c("county", "year"), model = "within", 
+             effect = "twoways", cluster = "state",
+             weights = weights)
+
+print(model)
+
+#Coefficients:
+#  successful   postattack c.popsd.year 
+# -2.3299e-02  -5.8868e-03  -4.4138e-05 
+
+# Column 5
+
 
