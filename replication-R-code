@@ -237,4 +237,21 @@ print(model)
 #-0.0345958  0.0091828 
 # Consistent with author result
 
+# Column 2
+# First generate interaction term
+
+DF3$c.popsd.year <- DF3$popsd * DF3$year
+
+formula <- repshare ~ successful + postattack + c.popsd.year
+
+model <- plm(formula, data = DF3,
+             index = c("county", "year"), model = "within", 
+             effect = "twoways", cluster = "state")
+
+print(model)
+
+#Coefficients:
+#  successful   postattack c.popsd.year 
+# -3.2590e-02   6.9504e-03  -3.6417e-05 
+
 
