@@ -254,4 +254,20 @@ print(model)
 #  successful   postattack c.popsd.year 
 # -3.2590e-02   6.9504e-03  -3.6417e-05 
 
+# Column 3
+# Including state-year fixed effects
+
+formula <- repshare ~ successful + postattack + c.popsd.year
+
+model <- plm(formula, data = subset(DF3, mse == 1 | failmse == 1), 
+             index = c("county", "stateyear"), model = "within", 
+             effect = "twoways", cluster = "state")
+
+print(model)
+
+#Coefficients:
+#  successful   postattack c.popsd.year 
+# -1.9373e-02  -7.0745e-04  -3.4467e-05 
+
+# Column 4
 
