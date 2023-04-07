@@ -127,7 +127,7 @@ summary(model)
 
 # P-value for the interaction term is insignificant (0.361), parallel trends assumption is met
 
-# Plot
+# Still not sure how to graph it
 
 ########## Main results (table 4) ##########
 # Strategy 1
