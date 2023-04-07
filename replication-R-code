@@ -29,7 +29,7 @@ head(DF)
 summary(DF$repsharey)
 summary(DF)
 
-# Creating summary statistics table (table 1)
+########## Creating summary statistics table (table 1) ##########
 
 DF_sum <- c("repshare", "turnout", "popsd", "capital_state", "airport", 
             "lnincome", "poverty", "gini", "racialhhi", "mentalhealth", 
@@ -53,7 +53,7 @@ st(sumdata, add.median=TRUE, labels=labs,
    digits = 2, fixed.digits = FALSE, numformat = NA, out="latex", 
    title='Summary Statistics')
 
-# Table 2
+########## County characteristics (table 2) ##########
 # Strategy 1: Checking if counties with/without mass shootings and counties with
 # successful vs. failed mass shootings are different in observable
 # characteristics
@@ -112,7 +112,24 @@ stargazer(reg_results, type = "latex", header = FALSE, title = "County Character
 
 # Strategy 2 regression
 
-# Table 4
+########## Parallel trends assumption ##########
+# Test for parallel trends using an interaction term of time and treatment
+# Strategy 1
+
+model <- lm(repshare ~ ms*year, data = DF2)
+summary(model)
+
+# P-value for the interaction term is insignificant (0.411), parallel trends assumption is met
+
+# Strategy 2
+model <- lm(repshare ~ successful*year, data = DF3)
+summary(model)
+
+# P-value for the interaction term is insignificant (0.361), parallel trends assumption is met
+
+# Plot
+
+########## Main results (table 4) ##########
 # Strategy 1
 # Sample: all county-year observations (15,570)
 # Load data into dataframe 'DF2'
