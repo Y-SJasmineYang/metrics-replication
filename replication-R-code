@@ -128,6 +128,19 @@ summary(model)
 # P-value for the interaction term is insignificant (0.361), parallel trends assumption is met
 
 # Still not sure how to graph it
+# Below are the two methods that I've tried, I don't think either works
+
+# Create a scatterplot of the outcome variable by time and treatment
+library(ggplot2)
+
+ggplot(data = DF2, aes(x = year, y = repshare, color = mspost)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+
+ggplot(DF2_pre, aes(x = year, y = repshare, color = as.factor(mspost))) +
+  geom_point() +
+  geom_smooth(data = DF2_treat, method = "lm", se = FALSE) +
+  geom_smooth(data = DF2_control, method = "lm", se = FALSE)
 
 ########## Main results (table 4) ##########
 # Strategy 1
