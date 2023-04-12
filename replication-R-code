@@ -31,12 +31,15 @@ summary(DF)
 
 ########## Creating summary statistics table (table 1) ##########
 
+# Convert data frame to panel data frame
+pdata <- pdata.frame(DF, index = c("fips", "year"))
+
 DF_sum <- c("repshare", "turnout", "popsd", "capital_state", "airport", 
             "lnincome", "poverty", "gini", "racialhhi", "mentalhealth", 
             "pop15t39", "nevermarried", "sc", "lnhom_gun", "lnsui_gun", 
-            "lncrime_violent", "lncrime_proprty")
-            
-sumdata <- DF[DF_sum]
+            "lncrime_violent", "lncrime_proprty", "mse", "failmse")
+
+sumdata <- pdata[DF_sum]
 
 labs <- c("Republican share", "Turnout", 
           "Population (standardized)", "State capitol",
@@ -47,7 +50,7 @@ labs <- c("Republican share", "Turnout",
           "Population 15 to 39 years", "Single",
           "College dropouts", "Log (homicides by gun)", 
           "Log (suicides by Gun)","Log (violent crime)",
-          "Log (property crime)")
+          "Log (property crime)", "Mass shooting", "Failed mass shooting")
 
 st(sumdata, add.median=TRUE, labels=labs, 
    digits = 2, fixed.digits = FALSE, numformat = NA, out="latex", 
