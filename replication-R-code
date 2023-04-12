@@ -125,6 +125,27 @@ texreg(reg_results,  file = "reg_table.tex",
        custom.model.names = rlabels, 
        custom.coef.names = clabels,
        caption = "Strategy 1 County Characteristics")
+       
+########## Predicting ms (table 3) ##########
+
+model1 <- lm(ms ~ repshare_lag1 + turnout_lag1 + capital_state_lag1 +
+              lnincome_lag1 + poverty_lag1 + 
+              gini_lag1 + racialhhi_lag1 + mentalhealth_lag1 + pop15t39_lag1 + 
+              nevermarried_lag1 + sc_lag1 + lnhom_gun_lag1 + lnsui_gun_lag1 + 
+              lncrime_violent_lag1 + lncrime_proprty_lag1 + factor(year), 
+             data = DF)
+coeftest(model1, vcov = vcovHC(model1, type = "HC1", cluster = "fips"))
+
+model2 <- lm(ms ~ repshare_lag1 + turnout_lag1 + capital_state_lag1 +
+               lnincome_lag1 + poverty_lag1 + 
+               gini_lag1 + racialhhi_lag1 + mentalhealth_lag1 + pop15t39_lag1 + 
+               nevermarried_lag1 + sc_lag1 + lnhom_gun_lag1 + lnsui_gun_lag1 + 
+               lncrime_violent_lag1 + lncrime_proprty_lag1 + factor(year), 
+             data = DF,
+             subset = mse == 1 | failmse == 1, )
+coeftest(model2, vcov = vcovHC(model2, type = "HC1", cluster = "fips"))
+
+stargazer(model1, model2)
 
 ########## Parallel trends assumption ##########
 # Test for parallel trends using an interaction term of time and treatment
