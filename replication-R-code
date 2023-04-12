@@ -124,7 +124,7 @@ clabels <- c("Constant", "MS", "Population")
 texreg(reg_results,  file = "reg_table.tex",
        custom.model.names = rlabels, 
        custom.coef.names = clabels,
-       caption = "County Characteristics")
+       caption = "Strategy 1 County Characteristics")
 
 ########## Parallel trends assumption ##########
 # Test for parallel trends using an interaction term of time and treatment
