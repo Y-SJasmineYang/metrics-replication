@@ -96,22 +96,24 @@ for (var_name in vars_to_lag) {
 
 print(reg_results)
 
-# Export results to regression table using stargazer
-# Below code to export regression table should work but it does not flip!
+# Export results to regression table
 
-stargazer(reg_results, type = "latex", header = FALSE, title = "County Characteristics",
-          column.labels = c("Republican share", "Turnout", 
-                            "State capitol",
-                            "Log (median HH income)", 
-                            "Poverty rate","Inequality (Gini Index)", 
-                            "Racial diversity HHI", 
-                            "Proportion with mental issues", 
-                            "Population 15 to 39 years", "Single",
-                            "College dropouts", "Log (homicides by gun)", 
-                            "Log (suicides by Gun)","Log (violent crime)",
-                            "Log (property crime)"), 
-          row.labels = c("Constant", "MS", "Population"),
-          flip = TRUE)
+rlabels <- c("Republican share", "Turnout", 
+              "State capitol",
+              "Log (median HH income)", 
+              "Poverty rate","Inequality (Gini Index)", 
+              "Racial diversity HHI", "Proportion with mental issues", 
+             "Population 15 to 39 years", "Single",
+             "College dropouts", "Log (homicides by gun)", 
+             "Log (suicides by Gun)","Log (violent crime)",
+             "Log (property crime)")
+
+clabels <- c("Constant", "MS", "Population")
+
+texreg(reg_results,  file = "reg_table.tex",
+       custom.model.names = rlabels, 
+       custom.coef.names = clabels,
+       caption = "Strategy 1 County Characteristics")
 
 # Strategy 2 regression
 
