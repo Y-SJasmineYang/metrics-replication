@@ -1,6 +1,7 @@
 
 # Replication bit
 
+
 # Load packages
 library(foreign)
 library(stargazer)
@@ -15,6 +16,16 @@ library(vtable)
 library(plm)
 library(dplyr)
 library(magrittr)
+library(outreg)
+library(broom)
+library(fixest)
+library(DRDID)
+library(grf)
+library(did)
+library(synth)
+library(did)
+library(tidyr)
+
 
 # Set directory
 setwd("/Users/yangshuya/Desktop/Jasmine Yang/PhD/Econometrics 2/Replication/Replication/data")
