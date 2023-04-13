@@ -206,6 +206,13 @@ print(model)
 # Column 2
 # Create fixed effect regression model that controls for population and flexible population trends
 
+
+# Convert year to integer type if necessary
+DF2$year <- as.integer(DF2$year)
+
+# Convert the data to a panel format
+pdata <- pdata.frame(DF2, index = c("county", "year"))
+
 # Create the interaction term
 
 DF2$c.popsd.year <- DF2$popsd * DF2$year
